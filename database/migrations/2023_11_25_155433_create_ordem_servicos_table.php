@@ -53,8 +53,17 @@ return new class extends Migration
             $table->float('saldo_a_pagar');
             $table->enum('situacao_os', ['orcamento', 'aprovada', 'rejeitada', 'em andamento', 'concluida', 'garantia']);
             $table->string('obervacao_caixa');
+            $table->unsignedBigInteger('id_medico');
+            $table->unsignedBigInteger('id_cliente');
+            $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('id_produto');
 
 
+
+            $table->foreign('id_medico')->references('id')->on('medicos');
+            $table->foreign('id_cliente')->references('id')->on('clientes');
+            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_produto')->references('id')->on('produtos');
 
             $table->timestamps();
         });

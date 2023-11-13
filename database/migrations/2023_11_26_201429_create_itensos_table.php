@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('itensos', function (Blueprint $table) {
             $table->id();
+            $table->string('quantidade');
+            $table->decimal('preco_venda_unitario', 6,2);
+            $table->decimal('valor_total_item', 6,2);
+            $table->unsignedBigInteger('id_ordem_servico');
+            $table->unsignedBigInteger('id_produto');
             $table->timestamps();
+
+            $table->foreign('id_ordem_servico')->on('ordem_servicos')->references('id');
+            $table->foreign('id_produto')->on('produtos')->references('id');
+
+
         });
     }
 

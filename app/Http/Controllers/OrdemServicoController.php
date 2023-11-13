@@ -7,59 +7,56 @@ use Illuminate\Http\Request;
 
 class OrdemServicoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        $ordemServico = OrdemServico::all();
+
+        return view('ordem_servico.index', compact('ordemServico'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
-        //
+        return view('ordem_servico.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        //
+        try {
+            OrdemServico::create($request->all());
+        } catch (\Exception $exception) {
+            return view('ordem_servico.index')->with('error', $exception->getMessage());
+        }
+        return view('ordem_servico.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(OrdemServico $ordemServico)
     {
-        //
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(OrdemServico $ordemServico)
     {
-        //
+        return view('ordem_servico.edit', compact('ordemServico'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, OrdemServico $ordemServico)
     {
-        //
+        try {
+            $ordemServico->update($request->all());
+        } catch (\Exception $exception) {
+            return view('ordem_servico.index')->with('error', $exception->getMessage());
+        }
+        return view('ordem_servico.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(OrdemServico $ordemServico)
     {
-        //
+        $ordemServico->delete();
+        return view('ordem_servico.index');
     }
 }

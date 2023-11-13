@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrdemServicoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,5 +22,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Route::resource('ordem-servico', function(){
-//});
+Route::resource('ordem-servico', OrdemServicoController::class)->names(['ordem-servico']);
+
+Route::resource('cliente', OrdemServicoController::class)->names(['clientes']);
