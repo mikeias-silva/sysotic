@@ -93,7 +93,7 @@
     <label class="form-label">Data de entrega</label>
     <input type="date" name="" id="" class="form-control"/>
 </div>
-<div>
-    <button type="submit" class="form-control">Confirmar</button>
+<div class="mt-3">
+    <button type="submit" class="btn btn-primary">Confirmar</button>
     <button class="btn btn-outline-secondary">Cancelar</button>
 </div>
