@@ -17,7 +17,8 @@ class OrdemServico extends Model
         'cilindrico_perto_dir', 'cilindrico_perto_esq', 'cilindrico_longe_dir', 'cilindrico_longe_esq',
         'eixo_perto_dir', 'eixo_perto_esq', 'eixo_longe_dir', 'eixo_longe_esq',
         'dnp_perto_dir', 'dnp_perto_esq', 'co_longe_dir', 'co_longe_esq', 'co_perto_dir', 'co_perto_esq',
-        'saldo_a_pagar', 'situacao_os', 'observacao_caixa', 'id_cliente', 'id_medico', 'id_produto', 'id_user'
+        'saldo_a_pagar', 'situacao_os', 'observacao_caixa', 'id_cliente', 'id_medico', 'id_produto', 'id_user', 'dnp_longe_dir',
+        'dnp_longe_esq', 'obervacao_caixa'
         ];
 
     public function produto()

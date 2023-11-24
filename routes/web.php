@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\OrdemServicoController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('ordem-servico.index');
 });
 
 Auth::routes();
@@ -25,7 +26,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware('auth')->group(function () {
 
     Route::resource('ordem-servico', OrdemServicoController::class)->names(['ordem-servico']);
+    Route::resource('cliente', ClienteController::class)->names(['clientes']);
 });
 
 
-Route::resource('cliente', OrdemServicoController::class)->names(['clientes']);

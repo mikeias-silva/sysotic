@@ -4,62 +4,55 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use Illuminate\Http\Request;
+use Mockery\Exception;
 
 class ClienteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        $clientes = Cliente::all();
+        return view('cliente.index', compact('clientes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('cliente.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        try {
+            Cliente::create($request->except('_token'));
+            return redirect()->route('cliente.index')->with('success', 'Cadastrado com sucesso!');
+        } catch (Exception $exception) {
+            dd($exception->getMessage());
+            return redirect()->route('cliente.index')->withErrors(['errors' => $exception->getMessage()]);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Cliente $cliente)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Cliente $cliente)
     {
-        //
+        return view('cliente.edit', compact('cliente'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Cliente $cliente)
     {
-        //
+        try {
+            $cliente->update($request->except('_token'));
+            return redirect()->route('cliente.index')->with('success', 'Editado com sucesso!');
+        } catch (\Exception $exception) {
+            return redirect()->route('cliente.index')->withErrors(['error' => $exception->getMessage()]);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Cliente $cliente)
     {
-        //
+        try {
+            $cliente->delete();
+            return redirect()->route('cliente.index')->with('success', 'Deletado com sucesso!');
+        } catch (\Exception $exception) {
+            return redirect()->route('cliente.index')->withErrors(['error' => $exception->getMessage()]);
+        }
     }
 }

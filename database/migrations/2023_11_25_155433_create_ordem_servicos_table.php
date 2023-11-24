@@ -17,14 +17,14 @@ return new class extends Migration
             $table->date('data_emissao');
             $table->string('usuario_oculos');
             $table->enum('usuario_cv', ['principal', 'anexa']);
-            $table->string('observacao_os');
-            $table->float('desconto_produto');
+            $table->string('observacao_os')->nullable();
+            $table->float('desconto_produto')->nullable();
             $table->date('data_entrega');
-            $table->boolean('tipo_pagamento');
-            $table->integer('numero_parcelas');
-            $table->float('valor_antecipado');
+            $table->boolean('tipo_pagamento')->nullable();
+            $table->integer('numero_parcelas')->nullable();
+            $table->float('valor_antecipado')->nullable();
 
-            $table->float('valor_total');
+            $table->float('valor_total')->nullable();
             $table->float('esferico_perto_dir');
             $table->float('esferico_perto_esq');
             $table->float('esferico_longe_dir');
@@ -50,13 +50,13 @@ return new class extends Migration
             $table->integer('co_longe_esq');
             $table->integer('co_perto_dir');
             $table->integer('co_perto_esq');
-            $table->float('saldo_a_pagar');
+            $table->float('saldo_a_pagar')->nullable();
             $table->enum('situacao_os', ['orcamento', 'aprovada', 'rejeitada', 'em andamento', 'concluida', 'garantia']);
-            $table->string('obervacao_caixa');
-            $table->unsignedBigInteger('id_medico');
-            $table->unsignedBigInteger('id_cliente');
-            $table->unsignedBigInteger('id_user');
-            $table->unsignedBigInteger('id_produto');
+            $table->string('obervacao_caixa')->nullable();
+            $table->unsignedBigInteger('id_medico')->nullable();
+            $table->unsignedBigInteger('id_cliente')->nullable();
+            $table->unsignedBigInteger('id_user')->nullable();
+            $table->unsignedBigInteger('id_produto')->nullable();
 
 
 

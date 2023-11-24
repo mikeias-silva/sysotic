@@ -36,7 +36,7 @@
                         <a href="{{ route('ordem-servico.index') }}" class="nav-link">Ordem de Serviço</a>
                     </li>
                     <li class="nav-item">
-                        <a href="">Pagamentos</a>
+                        <a href="" class="nav-link">Pagamentos</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('cliente.index') }}" class="nav-link">Clientes</a>
@@ -91,6 +91,7 @@
     </nav>
 
     <main class="py-4 container">
+        @include('layouts.message')
         @yield('content')
     </main>
 </div>
