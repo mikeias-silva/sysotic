@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Medico;
 use App\Models\OrdemServico;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,8 @@ class OrdemServicoController extends Controller
     public function create()
     {
         $clientes = Cliente::all();
-        return view('ordem_servico.create', compact('clientes'));
+        $medicos = Medico::all();
+        return view('ordem_servico.create', compact('clientes', 'medicos'));
     }
 
 

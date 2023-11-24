@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\OrdemServicoController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('ordem-servico', OrdemServicoController::class)->names(['ordem-servico']);
     Route::resource('cliente', ClienteController::class)->names(['clientes']);
+    Route::resource('medico', MedicoController::class)->names(['medico']);
 });
 
 

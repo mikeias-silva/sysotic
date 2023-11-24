@@ -23,7 +23,12 @@
 </div>
 <div>
     <label class="form-label">Medico</label>
-    <input type="text" name="medico" id="" class="form-control">
+    <select name="id_medico" class="form-select">
+        @foreach($medicos as $medico)
+            <option value="{{ $medico->id }}">{{ $medico->nome_medico }}</option>
+        @endforeach
+    </select>
+{{--    <input type="text" name="medico" id="" class="form-control">--}}
 </div>
 <div class="">
     <span>Lente para longe</span>

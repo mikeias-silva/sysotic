@@ -7,59 +7,55 @@ use Illuminate\Http\Request;
 
 class MedicoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        $medicos = Medico::all();
+        return view('medicos.index', compact('medicos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('medicos.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        try {
+            Medico::create($request->except('_token'));
+            return redirect()->route('medico.index')->with('success', 'Inserido com sucesso!');
+        } catch (\Exception $exception) {
+            return redirect()->route('medico.index')->withErrors(['error' => $exception->getMessage()]);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Medico $medico)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Medico $medico)
     {
-        //
+        return view('medicos.edit', compact('medico'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Medico $medico)
     {
-        //
+        try {
+            $medico->update($request->except('_token'));
+            return redirect()->route('medico.index')->with('success', 'Editado com sucesso!');
+        } catch (\Exception $exception) {
+            return redirect()->route('medico.index')->withErrors(['error' => $exception->getMessage()]);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Medico $medico)
     {
-        //
+        try {
+            $medico->delete();
+            return redirect()->route('medico.index')->with('success', 'Deletado com sucesso!');
+        } catch (\Exception $exception) {
+            return redirect()->route('medico.index')->withErrors(['error' => $exception->getMessage()]);
+        }
     }
 }

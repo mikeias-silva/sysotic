@@ -45,6 +45,9 @@
                         <a href="" class="nav-link">Produtos</a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('medico.index') }}" class="nav-link">Medicos</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="" class="nav-link">Relatórios</a>
                     </li>
 
