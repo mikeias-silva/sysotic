@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('ordem_servicos', function (Blueprint $table) {
             $table->id();
-            $table->integer('numero_ordem_servico');
-            $table->date('data_emissao');
+            $table->date('data_emissao')->default(now());
             $table->string('usuario_oculos');
             $table->enum('usuario_cv', ['principal', 'anexa']);
             $table->string('observacao_os')->nullable();
