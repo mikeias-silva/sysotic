@@ -39,7 +39,7 @@ class OrdemServicoController extends Controller
             OrdemServico::create($data);
         } catch (\Exception $exception) {
 //            dd($exception);
-            return redirect()->route('ordem-servico.index')->with('error', $exception->getMessage());
+            return redirect()->route('ordem-servico.index')->withErrors(['error', $exception->getMessage()]);
         }
         return redirect()->route('ordem-servico.index')->with('success', 'Cadastrado com sucesso');
     }
