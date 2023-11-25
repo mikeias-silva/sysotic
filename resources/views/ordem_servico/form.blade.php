@@ -1,7 +1,6 @@
 @csrf
 <div>
     <label for="" class="form-label">Cliente</label>
-
     <select name="id_cliente" class="form-select">
         @foreach($clientes as $cliente)
             <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>
@@ -9,7 +8,7 @@
     </select>
 </div>
 <div>
-    <span>Dados ordem de serviço</span>
+    <h3>Dados ordem de serviço</h3>
     <label for="" class="form-label">Armação</label>
     <input type="text" name="" id="" class="form-control"/>
 </div>
