@@ -31,8 +31,8 @@
 {{--    <input type="text" name="medico" id="" class="form-control">--}}
 </div>
 <div class="">
-    <span>Lente para longe</span>
-    <span>Olho direito (OD)</span>
+    <h3>Lente para longe</h3>
+    <h4>Olho direito (OD)</h4>
     <label class="form-label">esférico</label>
     <input type="text" name="esferico_longe_dir" id="" class="form-control">
     <label class="form-label">Cilíndrico</label>
@@ -51,7 +51,7 @@
     <input type="text" name="" id="" class="form-control">
 </div>
 <div class="">
-    <span>Olho Esquerdo (OE)</span>
+    <h4>Olho Esquerdo (OE)</h4>
     <label class="form-label">esférico</label>
     <input type="text" name="esferico_longe_esq" id="" class="form-control">
     <label class="form-label">Cilíndrico</label>
@@ -68,8 +68,8 @@
     <input type="text" name="" id="" class="form-control">
 </div>
 <div class="">
-    <span>Lente para Perto</span>
-    <span>Olho direito (OD)</span>
+    <h3>Lente para Perto</h3>
+    <h4>Olho direito (OD)</h4>
     <label class="form-label">esférico</label>
     <input type="text" name="esferico_perto_dir" id="" class="form-control">
     <label class="form-label">Cilíndrico</label>
@@ -86,7 +86,7 @@
     <input type="text" name="" id="" class="form-control">
 </div>
 <div class="">
-    <span>Olho Esquerdo (OE)</span>
+    <h4>Olho Esquerdo (OE)</h4>
     <label class="form-label">esférico</label>
     <input type="text" name="esferico_perto_esq" id="" class="form-control">
     <label class="form-label">Cilíndrico</label>
