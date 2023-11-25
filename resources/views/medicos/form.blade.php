@@ -8,7 +8,7 @@
 <div>
     <label for="" class="form-label">CRM</label>
     <label>
-        <input type="text" name="crm" id="" class="form-control" value="{{ $medico->crm }}">
+        <input type="text" name="crm" id="" class="form-control" value="{{ $medico->crm ?? '' }}">
     </label>
 </div>
 <div class="mt-3">
