@@ -26,4 +26,14 @@ class OrdemServico extends Model
         return $this->hasOne(Produto::class, 'id', 'id_produto');
     }
 
+    public function cliente()
+    {
+        return $this->hasOne(Cliente::class, 'id', 'id_cliente');
+    }
+
+    public function medico()
+    {
+        return $this->hasOne(Medico::class, 'id', 'id_medico');
+    }
+
 }

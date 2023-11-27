@@ -11,16 +11,18 @@
 {{--            <th>Produto</th>--}}
             <th>Data Entrega</th>
             <th>Situação</th>
+            <th>Opções</th>
         </tr>
         </thead>
         <tbody>
         @foreach($ordemServico as $item)
             <tr>
-                <td>{{ $item->numero_ordem_servico }}</td>
+                <td>{{ $item->id }}</td>
                 <td>{{ $item->usuario_oculos }}</td>
 {{--                <td>{{ $item->produto->nome_produto }}</td>--}}
                 <td>{{ $item->data_entrega }}</td>
                 <td>{{ $item->situacao_os }}</td>
+                <td><a href="{{ 'ordem-servico/pagamento/'.$item->id }}" class="nav-fill">Pagamento</a></td>
             </tr>
         @endforeach
         </tbody>

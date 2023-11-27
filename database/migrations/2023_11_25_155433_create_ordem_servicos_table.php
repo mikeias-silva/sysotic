@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('observacao_os')->nullable();
             $table->float('desconto_produto')->nullable();
             $table->date('data_entrega')->nullable();
-            $table->boolean('tipo_pagamento')->nullable();
+            $table->string('tipo_pagamento')->nullable();
             $table->integer('numero_parcelas')->nullable();
             $table->float('valor_antecipado')->nullable();
 

@@ -3,7 +3,10 @@
     <label class="form-label" for="nome">Nome</label>
     <input type="text" class="form-control" name="nome" value="{{ $cliente->nome ?? '' }}" />
     <label class="form-label" for="nome">Sexo</label>
-    <input type="text" class="form-control" name="sexo" value="{{ $cliente->sexo ?? '' }}"/>
+    <select name="sexo" id="" class="form-select">
+        <option value="m">Masculino</option>
+        <option value="f">Feminino</option>
+    </select>
     <label class="form-label">CPF</label>
     <input type="text" class="form-control" name="doc_identificacao" value="{{ $cliente->doc_identificacao ?? '' }}"/>
     <input type="hidden" name="tipo_documento" value="cpf">

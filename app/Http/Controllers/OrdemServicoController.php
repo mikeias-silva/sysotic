@@ -37,9 +37,10 @@ class OrdemServicoController extends Controller
                     'cilindrico_perto_esq'=>$request->cilindrido_perto_esq, 'id_user'=>$user->id,
                     'usuario_oculos'=>$usuario_oculos->nome];
             OrdemServico::create($data);
+
         } catch (\Exception $exception) {
 //            dd($exception);
-            return redirect()->route('ordem-servico.index')->withErrors(['error', $exception->getMessage()]);
+            return redirect()->route('ordem-servico.index')->withErrors(['error'=>$exception->getMessage()]);
         }
         return redirect()->route('ordem-servico.index')->with('success', 'Cadastrado com sucesso');
     }
@@ -59,10 +60,11 @@ class OrdemServicoController extends Controller
     {
         try {
             $ordemServico->update($request->all());
+            return redirect()->route('ordem-servico.index')->with('success', 'Editado com sucesso');
+
         } catch (\Exception $exception) {
-            return view('ordem_servico.index')->with('error', $exception->getMessage());
+            return view('ordem_servico.index')->withErrors(['error'=>$exception->getMessage()]);
         }
-        return view('ordem_servico.index');
     }
 
 
@@ -70,5 +72,21 @@ class OrdemServicoController extends Controller
     {
         $ordemServico->delete();
         return view('ordem_servico.index');
+    }
+
+    public function pagamento(OrdemServico $ordemServico){
+        return view('pagamento.pagamento', compact('ordemServico'));
+    }
+
+    public function salvarPagmento(Request $request, OrdemServico $ordemServico)
+    {
+        try {
+            $data = $request->except('_token') +['situacao_os'=>'aprovada'];
+            $ordemServico->update($data);
+            return redirect()->route('ordem-servico.index');
+        }catch (\Exception $exception){
+            return redirect()->route('ordem-servico.index')->withErrors(['error'=>$exception->getMessage()]);
+        }
+
     }
 }
