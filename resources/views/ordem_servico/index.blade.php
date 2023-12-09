@@ -24,7 +24,10 @@
                 <td>{{ $item->data_emissao }}</td>
                 <td>{{ $item->data_entrega }}</td>
                 <td>{{ $item->situacao_os }}</td>
-                <td><a href="{{ 'ordem-servico/pagamento/'.$item->id }}" class="nav-fill">Pagamento</a></td>
+                <td>
+                    <a href="{{ route('ordem-servico.edit', [$item->id]) }}" class="btn btn-info">Editar</a>
+                    <a  href="{{ route('ordem-servico.pagamento', [$item->id]) }}" class="nav-fill btn btn-primary">Pagamento</a>
+                </td>
             </tr>
         @endforeach
         </tbody>

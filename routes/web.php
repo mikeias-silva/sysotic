@@ -26,9 +26,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware('auth')->group(function () {
 
+
     Route::resource('ordem-servico', OrdemServicoController::class)->names(['ordem-servico']);
+
     Route::get('ordem-servico/pagamento/{ordemServico}', [OrdemServicoController::class, 'pagamento'])->name('ordem-servico.pagamento');
-    Route::put('ordem-servico/pagamento/{ordemServico}', [OrdemServicoController::class, 'salvarPagmento'])->name('ordem-servico.pagamento');
+    Route::put('ordem-servico/pagamento/{ordemServico}', [OrdemServicoController::class, 'salvarPagamento'])->name('ordem-servico.pagamento');
+
     Route::resource('cliente', ClienteController::class)->names(['clientes']);
     Route::resource('medico', MedicoController::class)->names(['medico']);
 });

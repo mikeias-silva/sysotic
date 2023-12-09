@@ -12,15 +12,17 @@ class OrdemServicoController extends Controller
 
     public function index()
     {
-        $ordemServico = OrdemServico::all();
+        $ordemServico = OrdemServico::orderBy('data_emissao', 'desc')->get();
+//        dd($ordemServico);
         return view('ordem_servico.index', compact('ordemServico'));
     }
 
 
     public function create()
     {
-        $clientes = Cliente::all();
-        $medicos = Medico::all();
+        $clientes = Cliente::orderBy('nome', 'desc')->get();
+        $medicos = Medico::orderBy('nome_medico', 'desc')->get();
+
         return view('ordem_servico.create', compact('clientes', 'medicos'));
     }
 
@@ -32,15 +34,26 @@ class OrdemServicoController extends Controller
         $usuario_oculos = Cliente::where('id', $request->id_cliente)->first(['nome']);
 
         try {
-            $data = $request->except('_token') + ['ponte'=> '9.2', 'md'=>'8.2', 'medida_a'=>'8.2',
-                    'medida_b'=>'8.2', 'cilindrico_perto_dir'=>$request->colindrico_perto_dir,
-                    'cilindrico_perto_esq'=>$request->cilindrido_perto_esq, 'id_user'=>$user->id,
-                    'usuario_oculos'=>$usuario_oculos->nome];
+            $data =
+            $request->except('_token') +
+            [
+
+            'ponte'=> '9.2',
+            'md'=>'8.2',
+            'medida_a'=>'8.2',
+            'medida_b'=>'8.2',
+
+            'cilindrico_perto_dir'=>$request->colindrico_perto_dir,
+            'cilindrico_perto_esq'=>$request->cilindrido_perto_esq,
+
+            'id_user'=>$user->id,
+            'usuario_oculos'=>$usuario_oculos->nome];
+
             OrdemServico::create($data);
 
         } catch (\Exception $exception) {
-//            dd($exception);
-            return redirect()->route('ordem-servico.index')->withErrors(['error'=>$exception->getMessage()]);
+
+            return redirect()->route('ordem-servico.index')->withErrors(['error'=>'Erro inesperado ao salvar, entre em contato com suporte!']);
         }
         return redirect()->route('ordem-servico.index')->with('success', 'Cadastrado com sucesso');
     }
@@ -53,17 +66,22 @@ class OrdemServicoController extends Controller
 
     public function edit(OrdemServico $ordemServico)
     {
-        return view('ordem_servico.edit', compact('ordemServico'));
+        $medicos = Medico::orderBy('nome_medico', 'desc')->get();
+        $clientes = Cliente::orderBy('nome', 'desc')->get();
+//        dd($ordemServico);
+        return view('ordem_servico.edit', compact('ordemServico', 'medicos', 'clientes'));
     }
 
     public function update(Request $request, OrdemServico $ordemServico)
     {
         try {
+
             $ordemServico->update($request->all());
             return redirect()->route('ordem-servico.index')->with('success', 'Editado com sucesso');
 
         } catch (\Exception $exception) {
-            return view('ordem_servico.index')->withErrors(['error'=>$exception->getMessage()]);
+            dd($exception);
+            return redirect()->route('ordem-servico.index')->withErrors(['error'=>'Erro ao editar dados, entre em contato com o suporte!']);
         }
     }
 
@@ -78,14 +96,16 @@ class OrdemServicoController extends Controller
         return view('pagamento.pagamento', compact('ordemServico'));
     }
 
-    public function salvarPagmento(Request $request, OrdemServico $ordemServico)
+    public function salvarPagamento(Request $request, OrdemServico $ordemServico)
     {
         try {
-            $data = $request->except('_token') +['situacao_os'=>'aprovada'];
+            $data = $request->all() + ['situacao_os' => 'aprovada'];
+
             $ordemServico->update($data);
-            return redirect()->route('ordem-servico.index');
+
+            return redirect()->route('ordem-servico.index')->with('success', 'Salvo com sucesso');
         }catch (\Exception $exception){
-            return redirect()->route('ordem-servico.index')->withErrors(['error'=>$exception->getMessage()]);
+            return redirect()->route('ordem-servico.index')->withErrors(['error'=>'Erro inesperado ao salvar pagamento, entre em contato com o suporte!']);
         }
 
     }

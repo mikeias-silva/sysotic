@@ -18,7 +18,7 @@
                 <td>{{ $item->nome }}</td>
                 <td>{{ $item->cep }}</td>
                 <td>{{ $item->email }}</td>
-                <td> <a href="{{ route('cliente.edit', [$item->id]) }}">Editar</a>
+                <td> <a class=" btn btn-warning" href="{{ route('cliente.edit', [$item->id]) }}">Editar</a>
                     <!-- Formulário de Deletar -->
                     <form action="{{ route('cliente.destroy', $item->id) }}" method="POST" style="display:inline">
                         @csrf

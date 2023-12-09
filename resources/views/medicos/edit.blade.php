@@ -2,6 +2,14 @@
 @section('content')
     <form action="{{ route('medico.update', [$medico->id]) }}" method="post">
         @method('PATCH')
-        @include('medicos.form')
+        <div class="card">
+            <div class="card-header text-bg-primary">
+                <h2>Editar Médicos</h2>
+            </div>
+            <div class="card-body">
+                @include('medicos.form')
+
+            </div>
+        </div>
     </form>
 @endsection

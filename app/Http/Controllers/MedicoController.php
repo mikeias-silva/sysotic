@@ -42,7 +42,7 @@ class MedicoController extends Controller
     public function update(Request $request, Medico $medico)
     {
         try {
-            $medico->update($request->except('_token'));
+            $medico->update($request->all());
             return redirect()->route('medico.index')->with('success', 'Editado com sucesso!');
         } catch (\Exception $exception) {
             return redirect()->route('medico.index')->withErrors(['error' => $exception->getMessage()]);

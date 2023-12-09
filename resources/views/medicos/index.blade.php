@@ -16,7 +16,7 @@
             <tr>
                 <td>{{ $medico->nome_medico }}</td>
                 <td>{{ $medico->crm }}</td>
-                <td> <a href="{{ route('medico.edit', [$medico->id]) }}">Editar</a>
+                <td> <a class="btn btn-warning" href="{{ route('medico.edit', [$medico->id]) }}">Editar</a>
                     <!-- Formulário de Deletar -->
                     <form action="{{ route('medico.destroy', $medico->id) }}" method="POST" style="display:inline">
                         @csrf
