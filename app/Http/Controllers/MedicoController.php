@@ -25,7 +25,7 @@ class MedicoController extends Controller
             Medico::create($request->except('_token'));
             return redirect()->route('medico.index')->with('success', 'Inserido com sucesso!');
         } catch (\Exception $exception) {
-            return redirect()->route('medico.index')->withErrors(['error' => $exception->getMessage()]);
+            return redirect()->route('medico.index')->withErrors(['error' => 'Erro inesperado!']);
         }
     }
 
@@ -45,7 +45,7 @@ class MedicoController extends Controller
             $medico->update($request->all());
             return redirect()->route('medico.index')->with('success', 'Editado com sucesso!');
         } catch (\Exception $exception) {
-            return redirect()->route('medico.index')->withErrors(['error' => $exception->getMessage()]);
+            return redirect()->route('medico.index')->withErrors(['error' => 'Erro inesperado!']);
         }
     }
 
@@ -55,7 +55,7 @@ class MedicoController extends Controller
             $medico->delete();
             return redirect()->route('medico.index')->with('success', 'Deletado com sucesso!');
         } catch (\Exception $exception) {
-            return redirect()->route('medico.index')->withErrors(['error' => $exception->getMessage()]);
+            return redirect()->route('medico.index')->withErrors(['error' => 'Erro inesperado!']);
         }
     }
 }

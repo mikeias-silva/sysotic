@@ -67,7 +67,7 @@ class ClienteController extends Controller
             $cliente->update($request->except('_token'));
             return redirect()->route('cliente.index')->with('success', 'Editado com sucesso!');
         } catch (\Exception $exception) {
-            return redirect()->route('cliente.index')->withErrors(['error' => $exception->getMessage()]);
+            return redirect()->route('cliente.index')->withErrors(['error' => 'Erro inesperado!']);
         }
     }
 
@@ -77,7 +77,7 @@ class ClienteController extends Controller
             $cliente->delete();
             return redirect()->route('cliente.index')->with('success', 'Deletado com sucesso!');
         } catch (\Exception $exception) {
-            return redirect()->route('cliente.index')->withErrors(['error' => $exception->getMessage()]);
+            return redirect()->route('cliente.index')->withErrors(['error' => 'Erro inesperado!']);
         }
     }
 
