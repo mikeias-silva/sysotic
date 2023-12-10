@@ -41,8 +41,8 @@
                 <td>{{ $item->id }}</td>
                 <td>{{ $item->usuario_oculos }}</td>
 {{--                <td>{{ $item->produto->nome_produto }}</td>--}}
-                <td>{{ $item->data_emissao }}</td>
                 <td>{{ $item->data_entrega }}</td>
+                <td>{{ $item->data_emissao }}</td>
                 <td>{{ $item->situacao_os }}</td>
                 <td>
                     <a href="{{ route('ordem-servico.edit', [$item->id]) }}" class="btn btn-info">Editar</a>

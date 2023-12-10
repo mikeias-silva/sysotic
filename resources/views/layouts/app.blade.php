@@ -42,7 +42,7 @@
                         <a href="{{ route('medico.index') }}" class="nav-link">Medicos</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('ordem-servico.relatorio') }}" class="nav-link">Relatórios</a>
+                        <a href="{{ route('ordem-servico.filtro') }}" class="nav-link">Relatórios</a>
                     </li>
 
                 </ul>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use App\Models\Medico;
 use App\Models\OrdemServico;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,7 +15,11 @@ class OrdemServicoController extends Controller
     public function index()
     {
         $ordemServico = OrdemServico::orderBy('data_emissao', 'desc')->get();
-//        dd($ordemServico);
+
+        foreach ($ordemServico as $item){
+            $item->data_entrega = Carbon::createFromFormat('Y-m-d', $item->data_entrega)->format('d/m/Y');
+            $item->data_emissao = Carbon::createFromFormat('Y-m-d', $item->data_emissao)->format('d/m/Y');
+        }
         return view('ordem_servico.index', compact('ordemServico'));
     }
 
@@ -31,17 +36,17 @@ class OrdemServicoController extends Controller
     public function store(Request $request)
     {
         $validate = Validator::make($request->all(),
-        [
-            'id_cliente' => 'required',
-            'ponte' => 'required',
-            'adicao' => 'required',
+            [
+                'id_cliente' => 'required',
+                'ponte' => 'required',
+                'adicao' => 'required',
 
-        ],
-        [
-            'required' => 'Esse campo é obrigatório'
-        ]);
+            ],
+            [
+                'required' => 'Esse campo é obrigatório'
+            ]);
 
-        if($validate->fails()){
+        if ($validate->fails()) {
             return redirect()->route('ordem-servico.index')->withErrors($validate->errors());
         }
 
@@ -51,25 +56,25 @@ class OrdemServicoController extends Controller
 
         try {
             $data =
-            $request->except('_token') +
-            [
+                $request->except('_token') +
+                [
 
-            'ponte'=> '9.2',
-            'md'=>'8.2',
-            'medida_a'=>'8.2',
-            'medida_b'=>'8.2',
+                    'ponte' => '9.2',
+                    'md' => '8.2',
+                    'medida_a' => '8.2',
+                    'medida_b' => '8.2',
 
-            'cilindrico_perto_dir'=>$request->colindrico_perto_dir,
-            'cilindrico_perto_esq'=>$request->cilindrido_perto_esq,
+                    'cilindrico_perto_dir' => $request->colindrico_perto_dir,
+                    'cilindrico_perto_esq' => $request->cilindrido_perto_esq,
 
-            'id_user'=>$user->id,
-            'usuario_oculos'=>$usuario_oculos->nome];
+                    'id_user' => $user->id,
+                    'usuario_oculos' => $usuario_oculos->nome];
 
             OrdemServico::create($data);
 
         } catch (\Exception $exception) {
 
-            return redirect()->route('ordem-servico.index')->withErrors(['error'=>'Erro inesperado ao salvar, entre em contato com suporte!']);
+            return redirect()->route('ordem-servico.index')->withErrors(['error' => 'Erro inesperado ao salvar, entre em contato com suporte!']);
         }
         return redirect()->route('ordem-servico.index')->with('success', 'Cadastrado com sucesso');
     }
@@ -96,7 +101,7 @@ class OrdemServicoController extends Controller
             return redirect()->route('ordem-servico.index')->with('success', 'Editado com sucesso');
 
         } catch (\Exception $exception) {
-            return redirect()->route('ordem-servico.index')->withErrors(['error'=>'Erro ao editar dados, entre em contato com o suporte!']);
+            return redirect()->route('ordem-servico.index')->withErrors(['error' => 'Erro ao editar dados, entre em contato com o suporte!']);
         }
     }
 
@@ -107,7 +112,8 @@ class OrdemServicoController extends Controller
         return view('ordem_servico.index');
     }
 
-    public function pagamento(OrdemServico $ordemServico){
+    public function pagamento(OrdemServico $ordemServico)
+    {
         return view('pagamento.pagamento', compact('ordemServico'));
     }
 
@@ -119,16 +125,32 @@ class OrdemServicoController extends Controller
             $ordemServico->update($data);
 
             return redirect()->route('ordem-servico.index')->with('success', 'Salvo com sucesso');
-        }catch (\Exception $exception){
-            return redirect()->route('ordem-servico.index')->withErrors(['error'=>'Erro inesperado ao salvar pagamento, entre em contato com o suporte!']);
+        } catch (\Exception $exception) {
+            return redirect()->route('ordem-servico.index')->withErrors(['error' => 'Erro inesperado ao salvar pagamento, entre em contato com o suporte!']);
         }
 
     }
 
-    public function relatorio()
+    public function relatorio(Request $request)
     {
-//        dd('o');
-        $ordensServico = OrdemServico::all();
+
+        $query = OrdemServico::query();
+
+        if ($request->filled('nome')) {
+            $query->where('usuario_oculos', 'like', '%' . $request->nome . '%');
+        }
+
+        if ($request->filled('data_inicio') && $request->filled('data_fim')) {
+            $query->whereBetween('data_entrega', [$request->data_inicio, $request->data_fim]);
+        }
+
+        $ordensServico = $query->get();
+
         return view('ordem_servico.relatorio', compact('ordensServico'));
+    }
+
+    public function relatorioFiltro()
+    {
+        return view('ordem_servico.filtro');
     }
 }
