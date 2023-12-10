@@ -31,7 +31,7 @@
 <div class="row">
     <div class="col-3">
         <label class="form-label">CEP*</label>
-        <input class="form-control" name="cep" value="{{ $cliente->cep ?? '' }}" pattern="\d{9}" maxlength="9" required/>
+        <input class="form-control" name="cep" value="{{ $cliente->cep ?? '' }}" pattern="\d{8}" maxlength="8" required/>
     </div>
     <div class="col-6">
         <label class="form-label">Rua*</label>

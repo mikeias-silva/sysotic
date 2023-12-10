@@ -6,6 +6,7 @@ use App\Models\Cliente;
 use App\Models\Medico;
 use App\Models\OrdemServico;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class OrdemServicoController extends Controller
 {
@@ -29,6 +30,21 @@ class OrdemServicoController extends Controller
 
     public function store(Request $request)
     {
+        $validate = Validator::make($request->all(),
+        [
+            'id_cliente' => 'required',
+            'ponte' => 'required',
+            'adicao' => 'required',
+
+        ],
+        [
+            'required' => 'Esse campo é obrigatório'
+        ]);
+
+        if($validate->fails()){
+            return redirect()->route('ordem-servico.index')->withErrors($validate->errors());
+        }
+
         $user = \Auth::user(); // Retorna o modelo de usuário autenticado
 
         $usuario_oculos = Cliente::where('id', $request->id_cliente)->first(['nome']);
@@ -80,7 +96,6 @@ class OrdemServicoController extends Controller
             return redirect()->route('ordem-servico.index')->with('success', 'Editado com sucesso');
 
         } catch (\Exception $exception) {
-            dd($exception);
             return redirect()->route('ordem-servico.index')->withErrors(['error'=>'Erro ao editar dados, entre em contato com o suporte!']);
         }
     }
@@ -105,8 +120,16 @@ class OrdemServicoController extends Controller
 
             return redirect()->route('ordem-servico.index')->with('success', 'Salvo com sucesso');
         }catch (\Exception $exception){
+            dd($exception);
             return redirect()->route('ordem-servico.index')->withErrors(['error'=>'Erro inesperado ao salvar pagamento, entre em contato com o suporte!']);
         }
 
+    }
+
+    public function relatorio()
+    {
+//        dd('o');
+        $ordensServico = OrdemServico::all();
+        return view('ordem_servico.relatorio', compact('ordensServico'));
     }
 }

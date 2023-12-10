@@ -8,7 +8,7 @@
 
         <div class="row">
             <div class="col-5">
-                <label for="" class="form-label">Cliente</label>
+                <label for="" class="form-label">Cliente*</label>
                 <select name="id_cliente" class="form-select">
                     @foreach($clientes as $cliente)
                         <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>
@@ -79,12 +79,12 @@
                         <input type="text" name="co_longe_dir" id="" class="form-control"
                                value="{{ old('co_longe_dir') ?? $ordemServico->co_longe_dir ?? '' }}">
 
-                        <label class="form-label">Adição</label>
+                        <label class="form-label">Adição*</label>
                         <input type="text" name="adicao" id="" class="form-control"
                                value="{{ old('adicao') ?? $ordemServico->adicao ?? '' }}">
                     </div>
                     <div class="col-2">
-                        <label class="form-label">Ponte</label>
+                        <label class="form-label">Ponte*</label>
                         <input type="text" name="ponte" id="" class="form-control"
                                value="{{ old('ponte') ?? $ordemServico->ponte ?? '' }}">
 
@@ -219,7 +219,7 @@
     </div>
 </div>
 <div class="col-2 mt-3">
-    <label class="form-label">Data de entrega</label>
+    <label class="form-label">Data de entrega*</label>
     <input type="date" name="data_entrega" id="" class="form-control" min="@php echo date('Y-m-d'); @endphp"
            value="{{ old('data_entrega') ?? $ordemServico->data_entrega ?? '' }}"/>
 </div>

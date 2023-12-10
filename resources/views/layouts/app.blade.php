@@ -36,19 +36,13 @@
                         <a href="{{ route('ordem-servico.index') }}" class="nav-link">Ordem de Serviço</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">Pagamentos</a>
-                    </li>
-                    <li class="nav-item">
                         <a href="{{ route('cliente.index') }}" class="nav-link">Clientes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link">Produtos</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('medico.index') }}" class="nav-link">Medicos</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">Relatórios</a>
+                        <a href="{{ route('ordem-servico.relatorio') }}" class="nav-link">Relatórios</a>
                     </li>
 
                 </ul>

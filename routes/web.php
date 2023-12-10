@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('ordem-servico', OrdemServicoController::class)->names(['ordem-servico']);
 
+    Route::get('relatorios', [OrdemServicoController::class, 'relatorio'])->name('ordem-servico.relatorio');
     Route::get('ordem-servico/pagamento/{ordemServico}', [OrdemServicoController::class, 'pagamento'])->name('ordem-servico.pagamento');
     Route::put('ordem-servico/pagamento/{ordemServico}', [OrdemServicoController::class, 'salvarPagamento'])->name('ordem-servico.pagamento');
 
