@@ -50,7 +50,7 @@
 </div>
 <div class="row">
     <label class="form-label">Observação cliente</label>
-    <input class="form-control" name="observacao_cliente" value="{{ $cliente->observacao_cliente ?? '' }}" required/>
+    <input class="form-control" name="observacao_cliente" value="{{ $cliente->observacao_cliente ?? '' }}"/>
 </div>
 <div class="mt-3">
     <button class="btn btn-outline-secondary">Cancelar</button>
