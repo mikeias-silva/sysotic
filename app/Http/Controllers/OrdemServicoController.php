@@ -120,7 +120,6 @@ class OrdemServicoController extends Controller
 
             return redirect()->route('ordem-servico.index')->with('success', 'Salvo com sucesso');
         }catch (\Exception $exception){
-            dd($exception);
             return redirect()->route('ordem-servico.index')->withErrors(['error'=>'Erro inesperado ao salvar pagamento, entre em contato com o suporte!']);
         }
 
